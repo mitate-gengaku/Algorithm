@@ -131,12 +131,13 @@ type ConvertBoard<B extends Board> = {
 }
 
 /**
- * 勝利した場合、勝利文章を返することで型エラーを起こす
+ * 勝利した場合、勝利文字列を返することで型エラーを起こす
  */
 type CheckUserWin<B extends Board, P extends Position, C extends Player> =
   CheckAllWin<B, C> extends true ? {
-    board: `${C}の勝利しました`,
-    player: C
+    board: B,
+    player: C,
+    status: `${C}が勝利しました`,
   } : Play<B, P, C>
 
 type Game = CheckUserWin<InitialBoard, [0, 0], "O">
